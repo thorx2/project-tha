@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be11fa612982714f8701f9c6df1e25e, type: 3}
   m_Name: Zombie
   m_EditorClassIdentifier: 
-  MaxHealth: 30
-  DamagePerTick: 10
-  DamageRate: 2
-  MovementSpeed: 0.9
+  MaxHealth: 90
+  DamagePerTick: 30
+  DamageRate: 2.5
+  MovementSpeed: 1.2

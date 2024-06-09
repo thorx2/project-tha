@@ -15,4 +15,4 @@ MonoBehaviour:
   MaxHealth: 10
   DamagePerTick: 2
   DamageRate: 1
-  MovementSpeed: 1.1
+  MovementSpeed: 1.8

@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using Lean.Pool;
 using SuperMaxim.Messaging;
@@ -175,6 +176,22 @@ namespace ProjTha
         {
             LeanPool.DespawnAll();
             StartGame();
+        }
+
+        public void BoostSelected(EBoostType selectedBoost)
+        {
+            switch (selectedBoost)
+            {
+                case EBoostType.ERateOfFire:
+                    currentRunData.WeaponFireRateReduction += gameCoreParameters.BaseReductionInAttackInterval;
+                    break;
+                case EBoostType.EDamage:
+                    currentRunData.AdditionalAttackDamage += gameCoreParameters.AdditionalAttackDamage;
+                    break;
+                case EBoostType.EHealth:
+                    currentRunData.AdditionalBoostHealth += gameCoreParameters.AdditionalHP;
+                    break;
+            }
         }
     }
 }

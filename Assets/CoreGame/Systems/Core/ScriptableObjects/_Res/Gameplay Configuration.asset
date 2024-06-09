@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4442c4d2507259242b9a2d80bbba8380, type: 3}
   m_Name: Gameplay Configuration
   m_EditorClassIdentifier: 
+  AdditionalAttackDamage: 5
+  AdditionalHP: 10
+  BaseReductionInAttackInterval: 0.1
   RoundDurationInMins: 5
   XpPerPickup: 5
   XpLevelMapData:
-    m_keys: 0100000002000000
-    m_values: 0000000064000000
+    m_keys: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
+    m_values: 000000004b000000960000002c010000c2010000f401000058020000ee020000840300004c040000

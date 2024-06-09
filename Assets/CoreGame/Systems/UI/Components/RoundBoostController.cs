@@ -8,13 +8,6 @@ using UnityEngine.Audio;
 public class RoundBoostController : MonoBehaviour
 {
     [SerializeField]
-    private int AdditionalAttackDamage;
-    [SerializeField]
-    private int AdditionalHP;
-    [SerializeField]
-    private float BaseReductionInAttackInterval;
-
-    [SerializeField]
     private LeanWindow leanWindow;
 
 
@@ -51,19 +44,19 @@ public class RoundBoostController : MonoBehaviour
 
     public void IncreasedAttackDamageSelect()
     {
-        GameManager.Instance.GetPlayerData.AdditionalAttackDamage += AdditionalAttackDamage;
+        GameManager.Instance.BoostSelected(EBoostType.ERateOfFire);
         OnButtonSelected();
     }
 
     public void IncreasedHPSelect()
     {
-        GameManager.Instance.GetPlayerData.AdditionalBoostHealth += AdditionalHP;
+        GameManager.Instance.BoostSelected(EBoostType.ERateOfFire);
         OnButtonSelected();
     }
 
     public void IncreasedFireRateSelect()
     {
-        GameManager.Instance.GetPlayerData.WeaponFireRateReduction += BaseReductionInAttackInterval;
+        GameManager.Instance.BoostSelected(EBoostType.ERateOfFire);
         OnButtonSelected();
     }
 }

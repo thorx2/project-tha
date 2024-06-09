@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Skeleton
   m_EditorClassIdentifier: 
   MaxHealth: 50
-  DamagePerTick: 20
-  DamageRate: 2.5
-  MovementSpeed: 1.2
+  DamagePerTick: 10
+  DamageRate: 2
+  MovementSpeed: 1.6

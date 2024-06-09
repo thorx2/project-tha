@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Net.NetworkInformation;
 using DG.Tweening;
 using Lean.Pool;
@@ -107,7 +108,7 @@ namespace ProjTha
                 unitAnimator.SetBool(MOVE_ANIM_HASH, false);
                 if (!isPlayer)
                 {
-                    LeanPool.Despawn(gameObject);
+                    StartCoroutine(FrameSkipDespawn());
                 }
             }
             else if (isPlayer)
@@ -118,6 +119,13 @@ namespace ProjTha
                 }
                 unitAnimator.SetBool(MOVE_ANIM_HASH, rigidbodyRef.velocity.sqrMagnitude > 0.1);
             }
+        }
+
+        private IEnumerator FrameSkipDespawn()
+        {
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
+            LeanPool.Despawn(gameObject);
         }
         #endregion
 

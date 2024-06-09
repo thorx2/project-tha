@@ -78,6 +78,7 @@ public class UiController : MonoBehaviour
             case EGameState.EGameInMenu:
                 mainMenuCanvas.SetActive(true);
                 inGameCanvas.SetActive(false);
+                levelText.text = "1";
                 break;
             case EGameState.EGameRunning:
                 lastBoostShowLevel = 1;

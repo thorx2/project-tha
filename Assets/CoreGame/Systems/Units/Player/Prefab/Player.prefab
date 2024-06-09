@@ -660,6 +660,10 @@ MonoBehaviour:
   unitMovement: {fileID: 8005649057774761701}
   playerHealthBar: {fileID: 8191678844429547761}
   weaponController: {fileID: 3832103254263064517}
+  takeDamageClip:
+  - {fileID: 8300000, guid: 31ce0900d04019e4c91069ab3557e944, type: 3}
+  - {fileID: 8300000, guid: 653bbc58b86fdb549a31759404ee78cf, type: 3}
+  timeBetweenGrunts: 1.2
 --- !u!58 &6749631246142077269
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,12 @@ namespace ProjTha
         [SerializeField]
         private WeaponController weaponController;
 
+        [SerializeField]
+        private AudioClip[] takeDamageClip;
+        [SerializeField]
+        private float timeBetweenGrunts;
+        private float lastSfxTime;
+
         protected override void Start()
         {
             base.Start();
@@ -26,9 +33,12 @@ namespace ProjTha
         public override void TakeDamage(int damage)
         {
             base.TakeDamage(damage);
-
             playerHealthBar.value = HealthPercentage;
-            Debug.Log($"Player health at {playerHealthBar.value * 100}%");
+            if (lastSfxTime <= 0)
+            {
+                lastSfxTime = timeBetweenGrunts;
+                AudioManager.Instance.PlaySFX(takeDamageClip[UnityEngine.Random.Range(0, takeDamageClip.Length)]);
+            }
         }
 
         public override void ReInitWithConfiguration(UnitData newData)
@@ -46,6 +56,12 @@ namespace ProjTha
         public override void CustomUpdate()
         {
             base.CustomUpdate();
+
+            if (lastSfxTime > 0)
+            {
+                lastSfxTime -= Time.deltaTime;
+            }
+
             if (!IsAlive())
             {
                 GameManager.Instance.OnGameOver(false);
