@@ -42,7 +42,7 @@ namespace ProjTha
             lastFiredTick = fireInterval - GameManager.Instance.GetPlayerData.WeaponFireRateReduction;
             lastFiredTick = math.max(0.1f, lastFiredTick);
             var projectile = LeanPool.Spawn(spawnProjectilePrefab, transform.position, Quaternion.identity);
-            projectile.AddAdditionalDamage(GameManager.Instance.GetPlayerData.AdditionalAttackDamage);
+            projectile.SetAdditionalDamage(GameManager.Instance.GetPlayerData.AdditionalAttackDamage);
             projectile.SetTargetTransform(nearestTarget, visual.flipX ? Vector2.right : -Vector2.right);
         }
 

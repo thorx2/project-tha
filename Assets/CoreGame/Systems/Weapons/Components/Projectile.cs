@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Lean.Pool;
 using SuperMaxim.Messaging;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace ProjTha
         private Rigidbody2D rigidbodyRef;
 
         private BaseUnit targetDestination;
+
+        private int additionalDamage;
 
         private bool isAlive;
 
@@ -62,10 +65,16 @@ namespace ProjTha
             {
                 if (unit.IsAlive())
                 {
-                    unit.TakeDamage(baseDamage);
-                    LeanPool.Despawn(gameObject);
+                    unit.TakeDamage(baseDamage + additionalDamage);
+                    StartCoroutine(FrameSkipDespawn());
                 }
             }
+        }
+
+        private IEnumerator FrameSkipDespawn()
+        {
+            yield return new WaitForEndOfFrame();
+            LeanPool.Despawn(gameObject);
         }
 
         public void CustomFixedUpdate()
@@ -73,7 +82,8 @@ namespace ProjTha
             aliveDuration += Time.deltaTime;
             if (aliveDuration >= lifeTime)
             {
-                LeanPool.Despawn(gameObject);
+                aliveDuration = 0;
+                StartCoroutine(FrameSkipDespawn());
             }
 
             Vector2 moveDirection;
@@ -99,10 +109,7 @@ namespace ProjTha
             rigidbodyRef.MovePosition(rigidbodyRef.position + moveDirection * movementSpeed * Time.deltaTime);
         }
 
-        public void CustomUpdate()
-        {
-
-        }
+        public void CustomUpdate() { }
 
         public void OnDespawn()
         {
@@ -123,12 +130,12 @@ namespace ProjTha
 
         public bool CanFixedUpdate()
         {
-            return isAlive;
+            return isAlive && aliveDuration < lifeTime;
         }
 
-        public void AddAdditionalDamage(float additionalDamage)
+        public void SetAdditionalDamage(float additionalDamage)
         {
-            baseDamage += (int)additionalDamage;
+            additionalDamage = (int)additionalDamage;
         }
     }
 }

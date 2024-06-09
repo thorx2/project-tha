@@ -25,7 +25,7 @@ namespace ProjTha
         private Animator unitAnimator;
 
         [SerializeField]
-        private SpriteRenderer visual;
+        protected SpriteRenderer visual;
 
         private int MOVE_ANIM_HASH = Animator.StringToHash("IsMoving");
 
@@ -123,7 +123,6 @@ namespace ProjTha
 
         private IEnumerator FrameSkipDespawn()
         {
-            yield return new WaitForEndOfFrame();
             yield return new WaitForEndOfFrame();
             LeanPool.Despawn(gameObject);
         }

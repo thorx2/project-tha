@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using Lean.Pool;
 using SuperMaxim.Messaging;
@@ -17,7 +18,13 @@ public class XpDrop : MonoBehaviour
         transform.DOMove(collision.transform.position, 0.25f).SetEase(Ease.InCirc).OnComplete(() =>
         {
             Messenger.Default.Publish(new OnXpCollect());
-            LeanPool.Despawn(gameObject);
+            StartCoroutine(FrameSkipDespawn());
         });
+    }
+
+    private IEnumerator FrameSkipDespawn()
+    {
+        yield return new WaitForEndOfFrame();
+        LeanPool.Despawn(gameObject);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,20 +25,40 @@ namespace ProjTha
         private float timeBetweenGrunts;
         private float lastSfxTime;
 
+        private bool isImmortal = false;
+
         protected override void Start()
         {
             base.Start();
             isPlayer = true;
         }
 
+        public void RunImmortalFrameTimer()
+        {
+            isImmortal = true;
+            var seq = DOTween.Sequence();
+            seq.Append(visual.DOColor(Color.blue, 0.1f));
+            seq.Append(visual.DOColor(Color.red, 0.1f));
+            seq.Append(visual.DOColor(Color.green, 0.1f));
+            seq.Append(visual.DOColor(Color.white, 0.1f));
+            seq.OnComplete(() =>
+            {
+                isImmortal = false;
+
+            });
+        }
+
         public override void TakeDamage(int damage)
         {
-            base.TakeDamage(damage);
-            playerHealthBar.value = HealthPercentage;
-            if (lastSfxTime <= 0)
+            if (!isImmortal)
             {
-                lastSfxTime = timeBetweenGrunts;
-                AudioManager.Instance.PlaySFX(takeDamageClip[UnityEngine.Random.Range(0, takeDamageClip.Length)]);
+                base.TakeDamage(damage);
+                playerHealthBar.value = HealthPercentage;
+                if (lastSfxTime <= 0)
+                {
+                    lastSfxTime = timeBetweenGrunts;
+                    AudioManager.Instance.PlaySFX(takeDamageClip[UnityEngine.Random.Range(0, takeDamageClip.Length)]);
+                }
             }
         }
 
