@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b769349d0ca5694b92e5910c2b506d3, type: 3}
+  m_Name: SpawnConfiguration
+  m_EditorClassIdentifier: 
+  MobSpawnConfigList:
+  - Level: 1
+    SpawnRate: 3
+    SpawnPrefab: {fileID: 855396298382001930, guid: 59ba9d66f7ce40b4ea4b857c80972b45, type: 3}
+    CountPerSpawnCall: 1
+    CreepUnitData: {fileID: 11400000, guid: 646aea2472d1fdb408c8cbe90b655fe9, type: 2}
+  - Level: 3
+    SpawnRate: 10
+    SpawnPrefab: {fileID: 7405712803038500701, guid: bd432e57fdf990d49a2cea9cf658104b, type: 3}
+    CountPerSpawnCall: 1
+    CreepUnitData: {fileID: 11400000, guid: 90e7810e60c8c5b408b70b19e8baa71e, type: 2}
+  - Level: 6
+    SpawnRate: 10
+    SpawnPrefab: {fileID: 6103217194640146883, guid: b667d6ef4e3690446aa1f85c06182e66, type: 3}
+    CountPerSpawnCall: 1
+    CreepUnitData: {fileID: 11400000, guid: 81c0727dc6ce9fe4db5c66dfcdd824b6, type: 2}
+  LevelSpawnDeltaFactor:
+    m_keys: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
+    m_values:
+    - 0
+    - 0
+    - 0
+    - 0.5
+    - 0.5
+    - 0.5
+    - 0.5
+    - 0.6666667
+    - 0.6666667
+    - 0.6666667

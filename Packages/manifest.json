@@ -4,20 +4,22 @@
       "name": "package.openupm.com",
       "url": "https://package.openupm.com",
       "scopes": [
-        "com.github-glitchenzo.nugetforunity"
+        "com.github-glitchenzo.nugetforunity",
+        "com.unity.uiextensions"
       ]
     }
   ],
   "dependencies": {
-    "com.github-glitchenzo.nugetforunity": "4.1.1",
     "com.unity.2d.animation": "9.1.1",
     "com.unity.2d.pixel-perfect": "5.0.3",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.spriteshape": "9.0.3",
+    "com.unity.2d.tilemap": "1.0.0",
+    "com.unity.2d.tilemap.extras": "3.1.2",
     "com.unity.burst": "1.8.15",
     "com.unity.cinemachine": "2.10.0",
     "com.unity.collab-proxy": "2.3.1",
-    "com.unity.collections": "2.4.1",
+    "com.unity.collections": "2.4.2",
     "com.unity.ide.visualstudio": "2.0.22",
     "com.unity.inputsystem": "1.7.0",
     "com.unity.mathematics": "1.2.6",

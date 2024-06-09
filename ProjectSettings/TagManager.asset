@@ -11,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - GameMap
+  - Player
+  - Enemy
+  - Projectile
+  - Drop
+  - EnemyScanner
   - 
   - 
   - 
@@ -40,4 +40,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2828170743
+    locked: 0
+  - name: Props
+    uniqueID: 3274683161
+    locked: 0
+  - name: Drops
+    uniqueID: 2075599289
+    locked: 0
+  - name: Projectiles
+    uniqueID: 3324674829
+    locked: 0
+  - name: Units
+    uniqueID: 2958301527
+    locked: 0
+  - name: WorldUI
+    uniqueID: 4005172853
     locked: 0
