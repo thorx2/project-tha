@@ -135,7 +135,7 @@ namespace ProjTha
 
         public void SetAdditionalDamage(float additionalDamage)
         {
-            additionalDamage = (int)additionalDamage;
+            this.additionalDamage = (int)additionalDamage;
         }
     }
 }
