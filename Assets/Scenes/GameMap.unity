@@ -4031,8 +4031,8 @@ MonoBehaviour:
   prefab: {fileID: 4087394477897083418, guid: aa944d0645edb8e44be2d781ac3cd25d, type: 3}
   notification: 3
   strategy: 0
-  preload: 150
-  capacity: 250
+  preload: 450
+  capacity: 500
   recycle: 0
   persist: 0
   stamp: 1
