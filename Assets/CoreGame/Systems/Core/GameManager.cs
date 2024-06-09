@@ -11,10 +11,13 @@ namespace ProjTha
         public static bool PauseElementMovement = true;
 
         public PlayerData GetPlayerData { get => currentRunData; }
+
         private PlayerData currentRunData;
 
+        public float GameRoundDurationInSeconds { get => gameCoreParameters.RoundDurationInMins * 60; }
         [SerializeField]
-        private int surviveDurationInMins;
+        private GameCoreParameters gameCoreParameters;
+
 
         //TODO Move to spawn system? All spawning handled by one single class
         [SerializeField]
@@ -22,7 +25,6 @@ namespace ProjTha
 
         [SerializeField]
         private UnitData playerConfiguration;
-
 
         [SerializeField]
         private HoadMovementManager movementManager;
@@ -35,20 +37,12 @@ namespace ProjTha
 
         private PlayerUnit spawnedPlayer;
 
-        private float aliveDuration;
-
-        //TODO Make this a scriptable object for OTA turing using Addressables?
-        //For now, key is level and value is the XP required to attain that level (Cumulative)
-        [SerializeField]
-        private SerializableDictionary<int, int> XpLevelMapData;
-
-
         private int MaxLevelAttainable;
 
         protected override void SingletonAwakened()
         {
             currentRunData = new(1);
-            foreach (var item in XpLevelMapData)
+            foreach (var item in gameCoreParameters.XpLevelMapData)
             {
                 MaxLevelAttainable = math.max(MaxLevelAttainable, item.Key);
             }
@@ -63,13 +57,13 @@ namespace ProjTha
 
         protected void Update()
         {
-            if (spawnedPlayer != null && spawnedPlayer.IsAlive())
+            if (!PauseElementMovement && spawnedPlayer != null && spawnedPlayer.IsAlive())
             {
-                aliveDuration += Time.deltaTime;
+                currentRunData.CurrentRunDuration += Time.deltaTime;
 
-                if (aliveDuration > surviveDurationInMins * 60)
+                if (currentRunData.CurrentRunDuration > gameCoreParameters.RoundDurationInMins * 60)
                 {
-                    //YOU WIN HERE
+                    OnGameOver(true);
                 }
             }
         }
@@ -109,9 +103,9 @@ namespace ProjTha
 
             int newPossibleLevel = 0;
 
-            currentRunData.CurrentXPValue += amount.XpAddOnCollect;
+            currentRunData.CurrentXPValue += gameCoreParameters.XpPerPickup;
 
-            foreach (var item in XpLevelMapData)
+            foreach (var item in gameCoreParameters.XpLevelMapData)
             {
                 if (item.Value <= currentRunData.CurrentXPValue)
                 {
@@ -124,6 +118,12 @@ namespace ProjTha
             {
                 currentRunData.CurrentPlayerLevel = newPossibleLevel;
                 currentRunData.LevelProgressionPercentage = 1f;
+                if (newPossibleLevel != currentRunData.CurrentPlayerLevel)
+                {
+                    currentRunData.CurrentPlayerLevel = newPossibleLevel;
+                    spawnedPlayer.OnLevelUp();
+                }
+                Messenger.Default.Publish(currentRunData);
                 return;
             }
 
@@ -133,9 +133,9 @@ namespace ProjTha
                 spawnedPlayer.OnLevelUp();
             }
 
-            float top = currentRunData.CurrentXPValue - XpLevelMapData[currentRunData.CurrentPlayerLevel];
+            float top = currentRunData.CurrentXPValue - gameCoreParameters.XpLevelMapData[currentRunData.CurrentPlayerLevel];
 
-            float bottom = XpLevelMapData[currentRunData.CurrentPlayerLevel + 1] - XpLevelMapData[currentRunData.CurrentPlayerLevel];
+            float bottom = gameCoreParameters.XpLevelMapData[currentRunData.CurrentPlayerLevel + 1] - gameCoreParameters.XpLevelMapData[currentRunData.CurrentPlayerLevel];
 
             currentRunData.LevelProgressionPercentage = top / bottom;
 
@@ -149,7 +149,6 @@ namespace ProjTha
             spawnedPlayer.ReInitWithConfiguration(playerConfiguration);
             movementManager.SetTargetDestination(spawnedPlayer);
             mapManager.SetPlayerMovementRef(spawnedPlayer.MovementCompRef);
-            aliveDuration = 0;
             PauseElementMovement = false;
             followCam.LookAt = spawnedPlayer.transform;
             followCam.Follow = spawnedPlayer.transform;

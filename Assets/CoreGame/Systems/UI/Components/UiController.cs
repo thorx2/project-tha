@@ -54,13 +54,9 @@ public class UiController : MonoBehaviour
     {
         if (gameRunning && !GameManager.PauseElementMovement)
         {
-            timeRemaining -= Time.deltaTime;
+            var timeRemaining = GameManager.Instance.GameRoundDurationInSeconds - GameManager.Instance.GetPlayerData.CurrentRunDuration;
             TimeSpan time = TimeSpan.FromSeconds(timeRemaining);
             timerText.text = time.ToString(@"mm\:ss");
-            if (timeRemaining <= 0)
-            {
-                GameManager.Instance.OnGameOver(true);
-            }
         }
     }
 
@@ -87,7 +83,6 @@ public class UiController : MonoBehaviour
                 lastBoostShowLevel = 1;
                 inGameCanvas.SetActive(true);
                 mainMenuCanvas.SetActive(false);
-                timeRemaining = GameRoundTimer * 60;
                 gameRunning = true;
                 break;
             case EGameState.EGameOver:

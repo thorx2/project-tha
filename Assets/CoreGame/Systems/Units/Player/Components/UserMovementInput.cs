@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace ProjTha
 {
-    public class Movement : MonoBehaviour
+    public class UserMovementInput : MonoBehaviour
     {
         [SerializeField]
         private float movementSpeed;

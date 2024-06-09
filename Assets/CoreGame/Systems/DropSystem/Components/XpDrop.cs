@@ -16,10 +16,7 @@ public class XpDrop : MonoBehaviour
         AudioManager.Instance.PlaySFX(effectClip);
         transform.DOMove(collision.transform.position, 0.25f).SetEase(Ease.InCirc).OnComplete(() =>
         {
-            Messenger.Default.Publish(new OnXpCollect()
-            {
-                XpAddOnCollect = XpOnCollect,
-            });
+            Messenger.Default.Publish(new OnXpCollect());
             LeanPool.Despawn(gameObject);
         });
     }

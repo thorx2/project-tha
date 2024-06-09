@@ -7479,6 +7479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrintTrace: 0
+  gameCoreParameters: {fileID: 11400000, guid: a52c2cf0c01b9db458642aa8a9f7b21d, type: 2}
   surviveDurationInMins: 0
   playerPrefab: {fileID: 3312680242088790991, guid: 8bf27375d002d9845a4b403022f96265, type: 3}
   playerConfiguration: {fileID: 11400000, guid: f8d0f6788efe8da42b4571f786e8763d, type: 2}

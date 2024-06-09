@@ -19,7 +19,7 @@ namespace ProjTha
 
         [SerializeField]
         private LayerMask terrainMask;
-        private Movement playerMovementRef;
+        private UserMovementInput playerMovementRef;
         private Vector3 checkTerrainPosition;
         private readonly Collider2D[] hitResults = new Collider2D[50];
         public ChunkTrigger CurrentChunk;
@@ -29,7 +29,7 @@ namespace ProjTha
             MapUpdateScan();
         }
 
-        public void SetPlayerMovementRef(Movement playerMovementRef)
+        public void SetPlayerMovementRef(UserMovementInput playerMovementRef)
         {
             this.playerMovementRef = playerMovementRef;
             checkTerrainPosition = playerMovementRef.transform.position;

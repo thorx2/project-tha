@@ -4,6 +4,8 @@ namespace ProjTha
 {
     public class PlayerData
     {
+        public float CurrentRunDuration;
+
         public int CurrentPlayerLevel;
         public int CurrentXPValue;
         public float LevelProgressionPercentage;
@@ -20,6 +22,7 @@ namespace ProjTha
             WeaponFireRateReduction = 0;
             AdditionalBoostHealth = 0;
             AdditionalAttackDamage = 0;
+            CurrentRunDuration = 0;
         }
     }
 }

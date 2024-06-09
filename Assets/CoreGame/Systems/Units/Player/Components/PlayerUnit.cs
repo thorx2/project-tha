@@ -6,10 +6,10 @@ namespace ProjTha
 {
     public class PlayerUnit : BaseUnit
     {
-        [SerializeField]
-        private Movement unitMovement;
+        public UserMovementInput MovementCompRef { get => unitMovement; }
 
-        public Movement MovementCompRef { get => unitMovement; }
+        [SerializeField]
+        private UserMovementInput unitMovement;
 
         [SerializeField]
         private Slider playerHealthBar;
@@ -17,16 +17,10 @@ namespace ProjTha
         [SerializeField]
         private WeaponController weaponController;
 
-        private float AdditionalHP;
-
-        public override void OnSpawn()
+        protected override void Start()
         {
+            base.Start();
             isPlayer = true;
-        }
-
-        public override void OnDespawn()
-        {
-
         }
 
         public override void TakeDamage(int damage)
