@@ -19,12 +19,12 @@ MonoBehaviour:
     CountPerSpawnCall: 1
     CreepUnitData: {fileID: 11400000, guid: 646aea2472d1fdb408c8cbe90b655fe9, type: 2}
   - Level: 3
-    SpawnRate: 3
+    SpawnRate: 6
     SpawnPrefab: {fileID: 7405712803038500701, guid: bd432e57fdf990d49a2cea9cf658104b, type: 3}
     CountPerSpawnCall: 1
     CreepUnitData: {fileID: 11400000, guid: 90e7810e60c8c5b408b70b19e8baa71e, type: 2}
   - Level: 6
-    SpawnRate: 4.5
+    SpawnRate: 10
     SpawnPrefab: {fileID: 6103217194640146883, guid: b667d6ef4e3690446aa1f85c06182e66, type: 3}
     CountPerSpawnCall: 1
     CreepUnitData: {fileID: 11400000, guid: 81c0727dc6ce9fe4db5c66dfcdd824b6, type: 2}
@@ -32,12 +32,12 @@ MonoBehaviour:
     m_keys: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
     m_values:
     - 0
+    - 0
+    - 0
     - 0.25
-    - 0.25
-    - 0.5
-    - 0.5
     - 0.5
     - 0.6
+    - 0.65
     - 0.75
+    - 0.7
     - 0.8
-    - 0.9

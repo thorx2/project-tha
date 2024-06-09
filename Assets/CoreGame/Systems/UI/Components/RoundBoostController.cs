@@ -44,13 +44,13 @@ public class RoundBoostController : MonoBehaviour
 
     public void IncreasedAttackDamageSelect()
     {
-        GameManager.Instance.BoostSelected(EBoostType.ERateOfFire);
+        GameManager.Instance.BoostSelected(EBoostType.EDamage);
         OnButtonSelected();
     }
 
     public void IncreasedHPSelect()
     {
-        GameManager.Instance.BoostSelected(EBoostType.ERateOfFire);
+        GameManager.Instance.BoostSelected(EBoostType.EHealth);
         OnButtonSelected();
     }
 

@@ -27,8 +27,6 @@ public class UiController : MonoBehaviour
     [SerializeField]
     private TMP_Text levelText;
 
-    private float timeRemaining;
-
     private bool gameRunning = false;
 
     protected void Start()
@@ -79,14 +77,18 @@ public class UiController : MonoBehaviour
                 mainMenuCanvas.SetActive(true);
                 inGameCanvas.SetActive(false);
                 levelText.text = "1";
+                lastBoostShowLevel = 1;
                 break;
             case EGameState.EGameRunning:
                 lastBoostShowLevel = 1;
                 inGameCanvas.SetActive(true);
                 mainMenuCanvas.SetActive(false);
                 gameRunning = true;
+                levelText.text = "1";
                 break;
             case EGameState.EGameOver:
+                levelText.text = "1";
+                lastBoostShowLevel = 1;
                 gameOverPanel.gameObject.SetActive(true);
                 break;
         }
