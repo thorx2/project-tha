@@ -18,7 +18,10 @@ public class XpDrop : MonoBehaviour
         transform.DOMove(collision.transform.position, 0.25f).SetEase(Ease.InCirc).OnComplete(() =>
         {
             Messenger.Default.Publish(new OnXpCollect());
-            StartCoroutine(FrameSkipDespawn());
+            if (gameObject.activeInHierarchy)
+            {
+                StartCoroutine(FrameSkipDespawn());
+            }
         });
     }
 

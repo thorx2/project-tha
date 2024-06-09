@@ -180,6 +180,7 @@ namespace ProjTha
 
         public void BoostSelected(EBoostType selectedBoost)
         {
+            spawnedPlayer.RunImmortalFrameTimer();
             switch (selectedBoost)
             {
                 case EBoostType.ERateOfFire:

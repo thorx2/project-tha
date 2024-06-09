@@ -145,18 +145,40 @@ namespace ProjTha
             currentHealth -= damage;
             currentHealth = math.max(currentHealth, 0);
             var seq = DOTween.Sequence();
-            seq.Append(DOTween.To(() => emissionVal, (x) =>
+
+            if (isPlayer && currentHealth > 0)
             {
-                emissionVal = x;
-                propertyBlock.SetFloat("_Blend", emissionVal);
+                propertyBlock.SetColor("_Color", Color.red);
                 visual.SetPropertyBlock(propertyBlock);
-            }, 1f, 0.1f).SetEase(Ease.InSine));
-            seq.Append(DOTween.To(() => emissionVal, (x) =>
+                seq.Append(DOTween.To(() => emissionVal, (x) =>
+                {
+                    emissionVal = x;
+                    propertyBlock.SetFloat("_Blend", emissionVal);
+                    visual.SetPropertyBlock(propertyBlock);
+                }, 1f, 0.1f).SetEase(Ease.InSine));
+                seq.Append(DOTween.To(() => emissionVal, (x) =>
+                {
+                    emissionVal = x;
+                    propertyBlock.SetFloat("_Blend", emissionVal);
+                    visual.SetPropertyBlock(propertyBlock);
+                }, 0f, 0.1f));
+            }
+            else
             {
-                emissionVal = x;
-                propertyBlock.SetFloat("_Blend", emissionVal);
-                visual.SetPropertyBlock(propertyBlock);
-            }, 0f, 0.1f));
+                seq.Append(DOTween.To(() => emissionVal, (x) =>
+                {
+                    emissionVal = x;
+                    propertyBlock.SetFloat("_Blend", emissionVal);
+                    visual.SetPropertyBlock(propertyBlock);
+                }, 1f, 0.1f).SetEase(Ease.InSine));
+                seq.Append(DOTween.To(() => emissionVal, (x) =>
+                {
+                    emissionVal = x;
+                    propertyBlock.SetFloat("_Blend", emissionVal);
+                    visual.SetPropertyBlock(propertyBlock);
+                }, 0f, 0.1f));
+            }
+
         }
 
         public bool IsAlive()

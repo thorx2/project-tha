@@ -20,6 +20,15 @@ public class RoundBoostController : MonoBehaviour
     protected void Start()
     {
         leanWindow.OnOff.AddListener(OnUIClosed);
+        Messenger.Default.Subscribe<GameStateData>(OnGameStateStart);
+    }
+
+    private void OnGameStateStart(GameStateData data)
+    {
+        if (data.CurrentState == EGameState.EGameOver)
+        {
+            OnButtonSelected();
+        }
     }
 
     private void OnUIClosed()
