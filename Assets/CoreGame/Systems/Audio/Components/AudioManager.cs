@@ -2,26 +2,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioManager : MonoBehaviourSingleton<AudioManager>
+namespace ProjTha
 {
-    [SerializeField]
-    private List<AudioSource> sfxSources;
-
-    [SerializeField]
-    private AudioSource bgmSource;
-
-    [SerializeField]
-    private AudioMixer gameAudioMixer;
-
-    public void PlaySFX(AudioClip clip)
+    /// <summary>
+    /// Simple audio manager class which would control SFX playback from various sources
+    /// </summary>
+    public class AudioManager : MonoBehaviourSingleton<AudioManager>
     {
-        foreach (var src in sfxSources)
+        [SerializeField]
+        private List<AudioSource> sfxSources;
+
+        [SerializeField]
+        private AudioSource bgmSource;
+
+        [SerializeField]
+        private AudioMixer gameAudioMixer;
+
+        public void PlaySFX(AudioClip clip)
         {
-            if (!src.isPlaying)
+            foreach (var src in sfxSources)
             {
-                src.clip = clip;
-                src.Play();
-                break;
+                if (!src.isPlaying)
+                {
+                    src.clip = clip;
+                    src.Play();
+                    break;
+                }
             }
         }
     }

@@ -4,30 +4,33 @@ using Lean.Pool;
 using SuperMaxim.Messaging;
 using UnityEngine;
 
-public class XpDrop : MonoBehaviour
+namespace ProjTha
 {
-    [SerializeField]
-    private int XpOnCollect;
-
-    [SerializeField]
-    private AudioClip effectClip;
-
-    protected void OnTriggerEnter2D(Collider2D collision)
+    public class XpDrop : MonoBehaviour
     {
-        AudioManager.Instance.PlaySFX(effectClip);
-        transform.DOMove(collision.transform.position, 0.25f).SetEase(Ease.InCirc).OnComplete(() =>
+        [SerializeField]
+        private int XpOnCollect;
+
+        [SerializeField]
+        private AudioClip effectClip;
+
+        protected void OnTriggerEnter2D(Collider2D collision)
         {
-            Messenger.Default.Publish(new OnXpCollect());
-            if (gameObject.activeInHierarchy)
+            AudioManager.Instance.PlaySFX(effectClip);
+            transform.DOMove(collision.transform.position, 0.25f).SetEase(Ease.InCirc).OnComplete(() =>
             {
-                StartCoroutine(FrameSkipDespawn());
-            }
-        });
-    }
+                Messenger.Default.Publish(new OnXpCollect());
+                if (gameObject.activeInHierarchy)
+                {
+                    StartCoroutine(FrameSkipDespawn());
+                }
+            });
+        }
 
-    private IEnumerator FrameSkipDespawn()
-    {
-        yield return new WaitForEndOfFrame();
-        LeanPool.Despawn(gameObject);
+        private IEnumerator FrameSkipDespawn()
+        {
+            yield return new WaitForEndOfFrame();
+            LeanPool.Despawn(gameObject);
+        }
     }
 }

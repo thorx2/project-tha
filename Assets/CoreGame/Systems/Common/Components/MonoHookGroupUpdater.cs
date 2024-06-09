@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace ProjTha
 {
+    /// <summary>
+    /// Bypassing Unity's built in Update and FixedUpdate loop by using a custom IMonoUpdateHook interface
+    /// allows for a more fine/granular control over how and when object update loops happen
+    /// </summary>
     public class MonoHookGroupUpdater : MonoBehaviour
     {
         private HashSet<IMonoUpdateHook> monoUpdateHooks;

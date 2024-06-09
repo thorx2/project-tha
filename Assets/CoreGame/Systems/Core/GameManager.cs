@@ -79,6 +79,58 @@ namespace ProjTha
             }
         }
 
+        public void StartGame()
+        {
+            ResetRun();
+            spawnedPlayer = Instantiate(playerPrefab);
+            spawnedPlayer.ReInitWithConfiguration(playerConfiguration);
+            movementManager.SetTargetDestination(spawnedPlayer);
+            mapManager.SetPlayerMovementRef(spawnedPlayer.MovementCompRef);
+            PauseElementMovement = false;
+            followCam.LookAt = spawnedPlayer.transform;
+            followCam.Follow = spawnedPlayer.transform;
+            Messenger.Default.Publish(new GameStateData()
+            {
+                CurrentState = EGameState.EGameRunning
+            });
+            Messenger.Default.Publish(currentRunData);
+        }
+
+        public void OnGameOver(bool isWin)
+        {
+            Messenger.Default.Publish(new GameStateData()
+            {
+                CurrentState = EGameState.EGameOver
+            });
+            Messenger.Default.Publish(new GameEndData()
+            {
+                IsWin = isWin,
+            });
+        }
+
+        public void RestartGame()
+        {
+            LeanPool.DespawnAll();
+            StartGame();
+        }
+
+        public void BoostSelected(EBoostType selectedBoost)
+        {
+            spawnedPlayer.RunImmortalFrameTimer();
+            switch (selectedBoost)
+            {
+                case EBoostType.ERateOfFire:
+                    currentRunData.WeaponFireRateReduction += gameCoreParameters.BaseReductionInAttackInterval;
+                    break;
+                case EBoostType.EDamage:
+                    currentRunData.AdditionalAttackDamage += gameCoreParameters.AdditionalAttackDamage;
+                    break;
+                case EBoostType.EHealth:
+                    currentRunData.AdditionalBoostHealth += gameCoreParameters.AdditionalHP;
+                    break;
+            }
+        }
+
         private void OnGameStateChanged(GameStateData data)
         {
             switch (data.CurrentState)
@@ -141,58 +193,6 @@ namespace ProjTha
             currentRunData.LevelProgressionPercentage = top / bottom;
 
             Messenger.Default.Publish(currentRunData);
-        }
-
-        public void StartGame()
-        {
-            ResetRun();
-            spawnedPlayer = Instantiate(playerPrefab);
-            spawnedPlayer.ReInitWithConfiguration(playerConfiguration);
-            movementManager.SetTargetDestination(spawnedPlayer);
-            mapManager.SetPlayerMovementRef(spawnedPlayer.MovementCompRef);
-            PauseElementMovement = false;
-            followCam.LookAt = spawnedPlayer.transform;
-            followCam.Follow = spawnedPlayer.transform;
-            Messenger.Default.Publish(new GameStateData()
-            {
-                CurrentState = EGameState.EGameRunning
-            });
-            Messenger.Default.Publish(currentRunData);
-        }
-
-        public void OnGameOver(bool isWin)
-        {
-            Messenger.Default.Publish(new GameStateData()
-            {
-                CurrentState = EGameState.EGameOver
-            });
-            Messenger.Default.Publish(new GameEndData()
-            {
-                IsWin = isWin,
-            });
-        }
-
-        public void RestartGame()
-        {
-            LeanPool.DespawnAll();
-            StartGame();
-        }
-
-        public void BoostSelected(EBoostType selectedBoost)
-        {
-            spawnedPlayer.RunImmortalFrameTimer();
-            switch (selectedBoost)
-            {
-                case EBoostType.ERateOfFire:
-                    currentRunData.WeaponFireRateReduction += gameCoreParameters.BaseReductionInAttackInterval;
-                    break;
-                case EBoostType.EDamage:
-                    currentRunData.AdditionalAttackDamage += gameCoreParameters.AdditionalAttackDamage;
-                    break;
-                case EBoostType.EHealth:
-                    currentRunData.AdditionalBoostHealth += gameCoreParameters.AdditionalHP;
-                    break;
-            }
         }
     }
 }

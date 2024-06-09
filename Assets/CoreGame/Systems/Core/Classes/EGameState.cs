@@ -1,6 +1,12 @@
-public enum EGameState
+namespace ProjTha
 {
-    EGameInMenu,
-    EGameRunning,
-    EGameOver
+    /// <summary>
+    /// Standard game state enum
+    /// </summary>
+    public enum EGameState
+    {
+        EGameInMenu,
+        EGameRunning,
+        EGameOver
+    }
 }

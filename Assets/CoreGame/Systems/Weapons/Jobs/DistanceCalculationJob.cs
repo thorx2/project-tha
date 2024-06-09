@@ -13,6 +13,7 @@ struct DistanceCalculationJob : IJobParallelFor
 
     public void Execute(int index)
     {
+        //TODO Replace with DistanceSqr instead of Distance
         Distances[index] = Vector3.Distance(Transforms[index].Position, TargetPosition);
     }
 }

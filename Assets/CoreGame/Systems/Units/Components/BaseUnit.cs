@@ -34,6 +34,7 @@ namespace ProjTha
         private int maxHealth;
 
         private MaterialPropertyBlock propertyBlock;
+
         private float emissionVal;
 
         #region Unity
@@ -91,10 +92,7 @@ namespace ProjTha
             return gameObject.activeInHierarchy;
         }
 
-        public virtual void CustomFixedUpdate()
-        {
-
-        }
+        public virtual void CustomFixedUpdate() { }
 
         public virtual void CustomUpdate()
         {
